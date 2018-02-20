@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+  <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/themes/crl2.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- //date wrapper -->
+    <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.core.min.js"></script>
+    <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.calbox.min.js"></script>
+    <script type="text/javascript" src="  http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.datebox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+  <title>Car Run L</title>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+  <div data-role="page" id="loginPage"> <!-- start login page -->
+	<div data-role="header">
+		<h1>Log in or register</h1>
+	</div>
+      <div data-role="content">
+        <div class="mainFlexCont">
+          <div class="flexItem">
+            <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-a" data-transition="pop" id = "enterBtn">Enter</a>
+          </div>
+        </div>
+
+        <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+          <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+          <form>
+            <div style="padding:10px 20px;">
+              <h3>Please sign in</h3>
+              <label for="un" class="ui-hidden-accessible">Enter your email:</label>
+              <input type="text" name="user" id="un" value="szymonszym@mail.com" placeholder="email" data-theme="a">
+              <label for="pw" class="ui-hidden-accessible">Password:</label>
+              <input type="password" name="pass" id="pw" value="szymon" placeholder="password" data-theme="a">
+              <button type="" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onclick = "login()">Sign in</button>
+              <h3>Or register</h3>
+              <label for="regUn" class="ui-hidden-accessible">Enter your email:</label>
+              <input type="text" name="user" id="regUn" value="" placeholder="email" data-theme="a">
+              <label for="regPw" class="ui-hidden-accessible">Set password:</label>
+              <input type="password" name="pass" id="regPw" value="ppppp123" placeholder="password" data-theme="a">
+              <label for="regRPw" class="ui-hidden-accessible">Repeat password:</label>
+              <input type="password" name="pass" id="regRPw" value="" placeholder="password" data-theme="a">
+              <button type="" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onclick = "register()">Register</button>
+            </div>
+          </form>
+        </div>
+      </div><!-- /content -->
+
+      <div data-role="footer">
+          <h4></h4>
+      </div><!-- /footer -->
+  </div><!-- /page -->
+
+
+  <!-- Start of main page -->
+  <div data-role="page" id="main">
+
+    <div data-role="header">
+      <div>
+        <a class="ui-btn ui-btn-inline" onclick = "singOut()">Log out</a>
+      </div>
+      <h1 id="welcome">Main page</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+        <div class="mainFlexCont">
+          <div class="flexItem">
+            <a href="#addRace" class="ui-btn" onclick = "addCalendar()">Add race</a>
+          </div>
+          <div class="flexItem">
+            <a href="#myRaces" class="ui-btn" onclick = "loadRaces()">My races</a>
+          </div>
+          <div class="flexItem">
+            <a href="#achievements" class="ui-btn">Achievements</a>
+          </div>
+          <div class="flexItem">
+            <a href="#leagueStats" class="ui-btn">League stats</a>
+          </div>
+        </div>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <h4></h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+
+  <!-- Start of add race page -->
+  <div data-role="page" id="addRace">
+
+    <div data-role="header">
+      <div>
+        <a href="#main" class="ui-btn ui-btn-inline">Back to main</a>
+        <a class="ui-btn ui-btn-inline" onclick = "singOut()">Log out</a>
+      </div>
+      <h1>Add race form</h1>
+
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+      <div data-role="tabs" id="tabs">
+        <!-- tabs -->
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#tabOne" data-ajax="false">Add race from the list</a>
+            </li>
+            <li><a href="#tabTwo" data-ajax="false">Custom race</a>
+            </li>
+          </ul>
+        </div>
+        <div id="tabOne" class="ui-body-d ui-content">
+          <h3>Pick race from the list</h3>
+          <h3>Name | Location | Date | Distance</h3>
+          <div id="raceCalend"></div>
+        </div>
+        <div id="tabTwo">
+          <h1>Add custom race</h1>
+          <label for="form-race-name">Race name</label>
+          <input type="text" name="form-race-name" id="form-race-name" value="">
+          <label for="form-race-distance">Race distance (as integer)</label>
+          <input type="number" name="form-race-distance" pattern="[0-9]*" id="form-race-distance" value="">
+          <label for="form-race-date">Race date</label>
+          <input type="date" id="form-race-date" data-role="datebox" style="margin-top: 10px" data-options='{"mode": "calbox", "useNewStyle":true,"useFocus": true}'>
+          <label for="form-race-location">Race location</label>
+          <input type="text" name="form-race-location" id="form-race-location" value="">
+          <a class="ui-btn ui-btn-inline" id="addRaceBtn" onclick = "addRace()" href = "#myRaces">Add race</a>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <h4></h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of my races page -->
+  <div data-role="page" id="myRaces">
+    <div data-role="header">
+      <div>
+        <a href="#main" class="ui-btn ui-btn-inline">Back to main</a>
+        <a class="ui-btn ui-btn-inline" onclick = "singOut()">Log out</a>
+      </div>
+      <h1>List of races</h1>
+
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+      <a href="#addRace" class="ui-btn ui-btn-inline" onclick = "addCalendar()">Add race</a>
+      <h2>Your races/edit</h2>
+      <h3>Name | Location | Date | Distance</h3>
+      <div id="raceList"></div>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <h4></h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of ach page -->
+  <div data-role="page" id="achievements">
+    <div data-role="header">
+      <div>
+        <a href="#main" class="ui-btn ui-btn-inline">Back to main</a>
+        <a class="ui-btn ui-btn-inline" onclick = "singOut()">Log out</a>
+      </div>
+      <h1>Achievements</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+      <p>cool badges</p>
+
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <h4></h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of stats page -->
+  <div data-role="page" id="leagueStats">
+    <div data-role="header">
+      <div>
+        <a href="#main" class="ui-btn ui-btn-inline">Back to main</a>
+        <a class="ui-btn ui-btn-inline" onclick = "singOut()">Log out</a>
+      </div>
+      <h1>League overview</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+      <p>stats/edit</p>
+
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+      <h4></h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+</body>
+
+</html>

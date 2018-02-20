@@ -1,0 +1,17 @@
+* {
+    border: thin solid red;
+}
+
+.mainFlexCont {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+
+}
+
+.mainFlexCont {
+  .flexItem {
+    width: 200px;
+    margin: 15px;
+  }
+}
