@@ -29,7 +29,7 @@ gulp.task('prettier', () => {
 });
 
 gulp.task('sass', function () {
-    gulp.src('scss/main.scss')
+    gulp.src('scss/*.scss')
         .pipe(sass({includePaths: ['scss']}))
         .pipe(autoprefixer({
         			browsers: ['last 2 versions']

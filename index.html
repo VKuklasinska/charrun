@@ -5,9 +5,13 @@
   <meta charset="utf-8">
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/themes/crl2.css" />
+<!-- linked jq mobile themes from theme roller -->
+    <!-- <link rel="stylesheet" href="css/themes/crl2.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> -->
+<!-- jq -->
+
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <!-- //date wrapper -->
@@ -34,7 +38,7 @@
 
         <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
           <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-          <form>
+
             <div style="padding:10px 20px;">
               <h3>Please sign in</h3>
               <label for="un" class="ui-hidden-accessible">Enter your email:</label>
@@ -51,7 +55,6 @@
               <input type="password" name="pass" id="regRPw" value="" placeholder="password" data-theme="a">
               <button type="" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onclick = "register()">Register</button>
             </div>
-          </form>
         </div>
       </div><!-- /content -->
 
